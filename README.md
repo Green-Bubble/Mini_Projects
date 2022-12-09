@@ -1,2 +1,2 @@
 # Mini_Projects
-Bunch of mini projects using html css js react, etc
+Bunch of mini projects using html, css, js, React, Redux, etc
