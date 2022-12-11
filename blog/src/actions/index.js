@@ -8,3 +8,9 @@ export const fetchPosts = async () => {
     payload: response,
   };
 };
+
+export const selectPost = () => {
+  return {
+    type: "SELECT_POST",
+  };
+};
