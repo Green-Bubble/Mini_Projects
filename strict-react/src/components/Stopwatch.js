@@ -7,12 +7,17 @@ function Stopwatch({ color }) {
   const [timeInMillis, setTimeInMillis] = useState(0);
 
   useEffect(() => {
-    setInterval(() => {
+    console.log('efek dijalankan');
+    const intervalId = setInterval(() => {
       setTimeInMillis((prevValue) => prevValue + 100);
     }, 100);
+
+    return () => clearInterval(intervalId);
   }, []);
 
-  const onReset = () => { setTimeInMillis(0); };
+  const onReset = () => {
+    setTimeInMillis(0);
+  };
 
   return (
     <div className="stopwatch" style={{ color }}>
