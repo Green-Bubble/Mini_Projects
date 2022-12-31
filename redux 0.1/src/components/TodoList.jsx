@@ -1,20 +1,29 @@
 import React from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodoActionCreator, deleteTodoActionCreator, toggleActionCreator } from "../states/todos/action";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 
 const TodoList = () => {
-  const todos = []; //TODO: Get todos from store;
+  const todos = useSelector((states) => states.todos);
+  const dispatch = useDispatch();
 
   const onAddTodo = (text) => {
-    // TODO: dispatch action from ADD_TODO
-  };
-
-  const onTogggleTodo = (id) => {
-    // TODO: dispatch action from TOGGLE_TODO
+    const id = `todo-${+new Date()}`;
+    dispatch(
+      addTodoActionCreator({
+        id,
+        text,
+      })
+    );
   };
 
   const onDeleteTodo = (id) => {
-    // TODO: dispatch action from DELETE_TODO
+    dispatch(deleteTodoActionCreator(id));
+  };
+  
+  const onTogggleTodo = (id) => {
+    dispatch(toggleActionCreator(id));
   };
 
   return (
