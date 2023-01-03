@@ -17,6 +17,10 @@ const todosReducer = (todos = [], action = {}) => {
     });
   }
 
+  if (action.type === "RECIEVE_TODOS") {
+    return action.payload.todos;
+  }
+
   return todos;
 };
 
