@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodoActionCreator, asyncRecieveTodos, deleteTodoActionCreator, toggleActionCreator } from "../states/todos/action";
+import { asyncAddTodo, asyncDeleteTodo, asyncRecieveTodos, asyncToggleTodo } from "../states/todos/action";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 
@@ -12,24 +12,18 @@ const TodoList = () => {
     dispatch(asyncRecieveTodos());
   }, [dispatch]);
 
-  const onAddTodo = (text) => {
-    const id = `todo-${+new Date()}`;
-    dispatch(
-      addTodoActionCreator({
-        id,
-        text,
-      })
-    );
-  };
+  function onAddTodo(text) {
+    dispatch(asyncAddTodo(text));
+  }
 
-  const onDeleteTodo = (id) => {
-    dispatch(deleteTodoActionCreator(id));
-  };
+  function onToggleTodo(id) {
+    dispatch(asyncToggleTodo(id));
+  }
 
-  const onTogggleTodo = (id) => {
-    dispatch(toggleActionCreator(id));
-  };
-
+  function onDeleteTodo(id) {
+    dispatch(asyncDeleteTodo(id));
+  }
+  
   return (
     <div>
       <h3>My Todos</h3>
@@ -38,7 +32,7 @@ const TodoList = () => {
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
-            <TodoItem {...todo} toggleTodo={onTogggleTodo} deleteTodo={onDeleteTodo} />
+            <TodoItem {...todo} toggleTodo={onToggleTodo} deleteTodo={onDeleteTodo} />
           </li>
         ))}
       </ul>

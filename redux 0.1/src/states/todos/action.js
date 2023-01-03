@@ -53,7 +53,7 @@ const asyncAddTodo = (text) => {
 
 const asyncDeleteTodo = (id) => {
   return async (dispatch) => {
-    await mockAPI.deleteTodos(id);
+    await mockAPI.deleteTodo(id);
     dispatch(deleteTodoActionCreator(id));
   };
 };
