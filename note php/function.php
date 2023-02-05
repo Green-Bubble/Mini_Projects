@@ -51,4 +51,10 @@ function ubah($data)
   return mysqli_affected_rows($conn);
 }
 
+function cari($keyword)
+{
+  $query = "SELECT * FROM notes WHERE judul LIKE '%$keyword%' OR isi LIKE '%$keyword%'";
+  return query($query);
+}
+
 ?>
