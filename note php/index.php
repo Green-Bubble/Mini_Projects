@@ -1,8 +1,14 @@
 <?php
+session_start();
+if (!isset($_SESSION["login"])) {
+  header("Location: login.php");
+  exit;
+}
+
 require 'function.php';
 $notes = query("SELECT * FROM notes;");
 
-if(isset($_POST["cari"])){
+if (isset($_POST["cari"])) {
   $notes = cari($_POST["keyword"]);
 }
 
@@ -20,15 +26,17 @@ if(isset($_POST["cari"])){
 
 <body>
   <br></br>
+  <a href="logout.php">Logout</a>
+  <br></br>
   <form action="" method="post">
     <input type="text" name="keyword" placeholder="search note">
     <button type="submit" name="cari">Cari</button>
   </form>
 
   <br>
-  
+
   <a href="tambah.php">Tambah Note</a>
-  
+
   <ul>
     <?php foreach ($notes as $note): ?>
       <li>

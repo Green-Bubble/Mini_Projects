@@ -57,4 +57,40 @@ function cari($keyword)
   return query($query);
 }
 
+function regis($data){
+  global $conn;
+
+  $username = strtolower(stripslashes($data["username"])) ;
+  $password = mysqli_real_escape_string($conn, $data["password"]) ;
+  $konfirmasi = mysqli_real_escape_string($conn, $data["konfirmasi"]);
+
+  $queryCek = "SELECT username FROM pengguna WHERE username = '$username'";
+  $result = mysqli_query($conn, $queryCek);
+
+  if(mysqli_fetch_assoc($result)){
+    echo "
+      <script>
+        alert('usernamenya dan dipake dek');
+      </script>
+    ";
+    return false;
+  }
+
+  if($password !== $konfirmasi){
+    echo "
+    <script>
+      alert ('konfirmasi password ga sesuai dek');
+    </script>
+    ";
+    return false;
+  }
+
+  $password = password_hash($password, PASSWORD_DEFAULT);
+
+  $queryMasukin = "INSERT INTO pengguna VALUES ('','$username', '$password')";
+  mysqli_query($conn, $queryMasukin);
+
+  return mysqli_affected_rows($conn);
+}
+
 ?>
